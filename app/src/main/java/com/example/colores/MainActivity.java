@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private int r, g, b, a;
     private EditText nombre;
 
-    private SQLiteDatabase bd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         setContentView(R.layout.activity_main);
 
         DatabaseHelper dbH = new DatabaseHelper(this);
-        bd = dbH.getWritableDatabase();
 
 
 
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                                 String nom = nombre.getText().toString();
 
                                 ColorSel col = new ColorSel(nom, r, g, b, a, color);
-
+                                Cursor c =
                                 System.out.println(col);
                             }
                         })

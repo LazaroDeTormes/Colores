@@ -46,6 +46,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         return null;
     }
 
+    public void añadirEntrada(String nombre, int tono){
+        SQLiteDatabase bd = getReadableDatabase();
+        Cursor añadir = bd.rawQuery("insert into colores (nombre, tono) values (nombre, tono)", null);
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
