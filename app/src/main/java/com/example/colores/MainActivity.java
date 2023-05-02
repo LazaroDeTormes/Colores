@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                                 String nom = nombre.getText().toString();
 
                                 ColorSel col = new ColorSel(nom, r, g, b, a, color);
-                                Cursor c =
+                                SQLiteDatabase bbdd = getWritableDatabase();
+                                Cursor c = bbdd.rawQuery("insert into colores values (nom, r, g, b, a, tono)", null);
                                 System.out.println(col);
                             }
                         })
