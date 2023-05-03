@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -128,9 +129,17 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                                 ColorSel col = new ColorSel(tono, nom, r, g, b, a);
                                 System.out.println(col);
 
+
                                 SQLiteDatabase bbdd = dbH.getWritableDatabase();
-                                bbdd.rawQuery("insert into colores (tono, nombre, r, g, b, a) values (?, ?, ?, ?, ?, ?)", null);
-                                
+
+                                ContentValues nuevoRegistro = new ContentValues();
+                                nuevoRegistro.put("tono", tono);
+                                nuevoRegistro.put("nombre", nom);
+                                nuevoRegistro.put("r", r);
+                                nuevoRegistro.put("g", g);
+                                nuevoRegistro.put("b", b);
+                                nuevoRegistro.put("a", a);
+                                bbdd.insert("colores", null, nuevoRegistro);
 
                             }
                         })

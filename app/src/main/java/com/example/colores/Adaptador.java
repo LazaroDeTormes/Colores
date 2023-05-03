@@ -8,6 +8,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class Adaptador extends ArrayAdapter {
             vh = (Adaptador.ViewHolder) fila.getTag();
         }
 
-        ImageView tono = fila.findViewById(R.id.colorTono);
+        LinearLayout tono = fila.findViewById(R.id.colorTono);
         TextView nom = fila.findViewById(R.id.colorNombre);
 
         tono.setBackgroundColor(colores.get(position).getTono());
@@ -63,7 +64,7 @@ public class Adaptador extends ArrayAdapter {
 
 
     public class ViewHolder{
-        private ImageView tono;
+        private LinearLayout tono;
         private TextView nom;
     }
 

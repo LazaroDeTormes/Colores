@@ -18,7 +18,7 @@ public class ColorSel {
         this.a = a;
     }
 
-    public ColorSel(String nombre, int tono) {
+    public ColorSel( int tono, String nombre) {
         this.nombre = nombre;
         this.tono = tono;
     }

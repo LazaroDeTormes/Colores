@@ -29,12 +29,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
             SQLiteDatabase bbdd = getReadableDatabase();
             if (bbdd != null){
-                Cursor buscar = bbdd.rawQuery("select * from colores.db", null);
+                Cursor buscar = bbdd.rawQuery("select * from colores", null);
                 if (buscar.getCount()!=0){
                     while (buscar.moveToNext()){
-                        String nombre = buscar.getString(0);
-                        int tono = buscar.getInt(5);
-                        arrayList.add(new ColorSel(nombre, tono));
+                        String nombre = buscar.getString(1);
+                        int tono = buscar.getInt(0);
+                        arrayList.add(new ColorSel(tono, nombre));
                     }
                     return arrayList;
                 }
