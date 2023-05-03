@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
+import com.example.colores.Constantes;
+
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -11,19 +13,20 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteAssetHelper {
 
-    private static final String nombre_bbdd = "colores.db";
-    private static final int version = 1;
+
 
     private Context context;
 
     public DatabaseHelper(Context context) {
-        super(context, nombre_bbdd, null, version);
+        super(context, Constantes.NOMBRE_BBDD, null, Constantes.VERSION);
+        this.context = context;
     }
 
 
     public ArrayList<ColorSel> getAllData(){
+        ArrayList<ColorSel> arrayList = new ArrayList<>();
         try{
-            ArrayList<ColorSel> arrayList = new ArrayList<>();
+
             SQLiteDatabase bbdd = getReadableDatabase();
             if (bbdd != null){
                 Cursor buscar = bbdd.rawQuery("select * from colores.db", null);
@@ -37,13 +40,13 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                 }
             }else {
 
-                return null;
+                return arrayList;
             }
 
         }catch (Exception e){
             Toast.makeText(context, "No hay colores guardados", Toast.LENGTH_SHORT).show();
         }
-        return null;
+        return arrayList;
     }
 
     public void añadirEntrada(String nombre, int tono){

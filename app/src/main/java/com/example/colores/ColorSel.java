@@ -9,13 +9,13 @@ public class ColorSel {
     private int a;
     private int tono;
 
-    public ColorSel(String nombre, int r, int g, int b, int a, int tono) {
+    public ColorSel(int tono, String nombre, int r, int g, int b, int a) {
+        this.tono = tono;
         this.nombre = nombre;
         this.r = r;
         this.g = g;
         this.b = b;
         this.a = a;
-        this.tono = tono;
     }
 
     public ColorSel(String nombre, int tono) {

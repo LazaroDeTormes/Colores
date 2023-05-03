@@ -1,4 +1,5 @@
 package com.example.colores;
+import com.example.colores.Constantes;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -42,8 +43,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private SeekBar azul;
     private SeekBar blanco;
     private int r, g, b, a;
+    private Integer tono;
     private EditText nombre;
-
+    private DatabaseHelper dbH;
 
 
     @Override
@@ -51,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseHelper dbH = new DatabaseHelper(this);
 
 
+        dbH = new DatabaseHelper(this);
 
         datos = findViewById(R.id.datos);
         cuadrado = findViewById(R.id.cuadrado);
@@ -118,14 +120,18 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                                 g = verde.getProgress();
                                 b = azul.getProgress();
                                 a = blanco.getProgress();
-                                int color = Color.argb(a,r,g,b);
+                                tono = Color.argb(a,r,g,b);
+                                System.out.println(tono);
 
                                 String nom = nombre.getText().toString();
 
-                                ColorSel col = new ColorSel(nom, r, g, b, a, color);
-                                SQLiteDatabase bbdd = getWritableDatabase();
-                                Cursor c = bbdd.rawQuery("insert into colores values (nom, r, g, b, a, tono)", null);
+                                ColorSel col = new ColorSel(tono, nom, r, g, b, a);
                                 System.out.println(col);
+
+                                SQLiteDatabase bbdd = dbH.getWritableDatabase();
+                                bbdd.rawQuery("insert into colores (tono, nombre, r, g, b, a) values (?, ?, ?, ?, ?, ?)", null);
+                                
+
                             }
                         })
                         .setView(view);
