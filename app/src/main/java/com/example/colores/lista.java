@@ -32,6 +32,8 @@ public class lista extends AppCompatActivity {
     private DatabaseHelper dbH;
     private LinearLayout fondotitulomenu;
     private AlertDialog.Builder ventana;
+    Adaptador adaptador;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class lista extends AppCompatActivity {
 
 
 
-        Adaptador adaptador = new Adaptador(this, R.layout.fila, dbH.getAllData());
+        adaptador = new Adaptador(this, R.layout.fila, dbH.getAllData());
 
         lista.setAdapter(adaptador);
 
@@ -72,6 +74,7 @@ public class lista extends AppCompatActivity {
         fondotitulomenu.setBackgroundColor(eleccion.getTono());
         menu.setHeaderView(view);
         inflater.inflate(R.menu.menubaseitem, menu);
+        position = adaptador.getPosition(eleccion);
 
     }
 
@@ -104,8 +107,8 @@ public class lista extends AppCompatActivity {
                         .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                lista.getAdapter().getItem()
-                                borrarTupla(1);
+                                ColorSel objeto = (ColorSel) adaptador.getItem(position);
+                                borrarTupla(objeto.getTono());
 
                             }
                         });
